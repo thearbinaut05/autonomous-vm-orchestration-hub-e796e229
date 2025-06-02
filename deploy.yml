@@ -1,0 +1,30 @@
+# Deployment Configuration for vm-orchestration-hub
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vm-orchestration-hub
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vm-orchestration-hub
+  template:
+    metadata:
+      labels:
+        app: vm-orchestration-hub
+    spec:
+      containers:
+      - name: vm-orchestration-hub
+        image: vm-orchestration-hub:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
